@@ -34,7 +34,7 @@ resource "cloudflare_record" "domain" {
   name    = "${var.domain}"
   value   = "${element(var.public_ips, 0)}"
   type    = "A"
-  proxied = true
+  proxied = false
 }
 
 resource "cloudflare_record" "wildcard" {

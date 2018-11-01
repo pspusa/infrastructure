@@ -41,12 +41,12 @@ module "swap" {
 module "dns" {
   source = "./dns/cloudflare"
 
-  count      = "${var.node_count}"
-  email      = "${var.cloudflare_email}"
-  token      = "${var.cloudflare_token}"
-  domain     = "${var.domain}"
-  public_ips = "${module.provider.public_ips}"
-  hostnames  = "${module.provider.hostnames}"
+  count               = "${var.node_count}"
+  email               = "${var.cloudflare_email}"
+  token               = "${var.cloudflare_token}"
+  domain              = "${var.domain}"
+  public_ips          = "${module.provider.public_ips}"
+  hostnames           = "${module.provider.hostnames}"
 }
 
 # module "dns" {

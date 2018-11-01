@@ -2,13 +2,12 @@
 variable "node_count" {
   default = 3
 }
-
 variable "domain" {
-  default = "psplabs.org"
+  default = ""
 }
 
 variable "hostname_format" {
-  default = "psp-node-%d"
+  default = "k8n-node-do-%d"
 }
 
 /* hcloud */
@@ -51,7 +50,7 @@ variable "digitalocean_ssh_keys" {
 }
 
 variable "digitalocean_region" {
-  default = "sfo2"
+  default = ""
 }
 
 /* aws dns */
