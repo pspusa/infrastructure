@@ -1,1 +1,9 @@
 k8n/setup/dashboard/certs/*
+.env
+
+
+# Terraform files
+.terraform
+terraform.tfstate
+terraform.tfvars
+*.tfstate*

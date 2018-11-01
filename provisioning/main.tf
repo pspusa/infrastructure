@@ -1,0 +1,3 @@
+module "kubernetes" {
+  source = "./kubernetes"
+}
