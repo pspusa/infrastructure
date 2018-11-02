@@ -1,6 +1,6 @@
 /* general */
 variable "node_count" {
-  default = 3
+  default = 4
 }
 variable "domain" {
   default = ""
@@ -89,5 +89,15 @@ variable "google_managed_zone" {
 }
 
 variable "google_credentials_file" {
+  default = ""
+}
+
+variable "rexray_s3_url" {
+  default = ""
+}
+variable "rexray_s3_accesskey" {
+  default = ""
+}
+variable "rexray_s3_secret" {
   default = ""
 }
