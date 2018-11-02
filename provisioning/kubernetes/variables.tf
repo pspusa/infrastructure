@@ -1,6 +1,6 @@
 /* general */
 variable "node_count" {
-  default = 4
+  default = 3
 }
 variable "domain" {
   default = ""

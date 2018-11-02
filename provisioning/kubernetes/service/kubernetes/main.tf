@@ -116,3 +116,7 @@ output "overlay_interface" {
 output "overlay_cidr" {
   value = "${var.overlay_cidr}"
 }
+
+output "cluster_token" {
+  value = "${data.external.cluster_token.result.token}"
+}

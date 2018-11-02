@@ -124,15 +124,21 @@ module "kubernetes" {
   vpn_interface  = "${module.wireguard.vpn_interface}"
   vpn_ips        = "${module.wireguard.vpn_ips}"
   etcd_endpoints = "${module.etcd.endpoints}"
+#  rexray_s3_url = "${var.rexray_s3_url}"
+#  rexray_s3_accesskey = "${var.rexray_s3_accesskey}"
+#  rexray_s3_secret = "${var.rexray_s3_secret}"
 }
-
 
 module "rexray" {
   source = "./service/rexray"
 
   count          = "${var.node_count}"
   connections    = "${module.provider.public_ips}"
+
   rexray_s3_url = "${var.rexray_s3_url}"
   rexray_s3_accesskey = "${var.rexray_s3_accesskey}"
   rexray_s3_secret = "${var.rexray_s3_secret}"
+
+  cluster_status     = "${module.kubernetes.status}"
+  #module.kubernetes.data.null_data_source.status
 }

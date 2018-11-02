@@ -45,8 +45,16 @@ EOT
       kubectl get nodes
 EOT
   }
+}
 
-  provisioner "local-exec" {
-    command = "rm -rf $HOME/.kube/${var.cluster_name}"
+data "null_data_source" "status" {
+  depends_on = ["null_resource.kubectl"]
+
+  inputs = {
+    value = "initiated"
   }
+}
+
+output "status" {
+  value = "true"
 }

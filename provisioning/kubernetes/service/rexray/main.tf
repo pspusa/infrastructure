@@ -16,11 +16,13 @@ variable "rexray_s3_secret" {
   type = "string"
 }
 
-variable "overlay_interface" {
-  default = "weave"
+variable "cluster_status" {
+  type = "string"
 }
 
 resource "null_resource" "rexray" {
+
+#  depends_on = ["module.kubernetes.null_resource.kubectl"]
 
   count = "${var.count}"
 
@@ -29,12 +31,6 @@ resource "null_resource" "rexray" {
     user  = "root"
     agent = true
   }
-
-#  provisioner "remote-exec" {
-#    inline = [
-#      "systemctl daemon-reload",
-#    ]
-#  }
 
   provisioner "remote-exec" {
     inline = <<EOF
@@ -53,6 +49,6 @@ data "template_file" "install" {
   }
 }
 
-output "overlay_interface" {
-  value = "${var.overlay_interface}"
+output "status" {
+  value = "${var.cluster_status}"
 }
