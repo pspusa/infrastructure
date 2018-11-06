@@ -1,0 +1,13 @@
+nodes:
+  - address: 45.76.233.141
+    user: rancher
+    ssh_key_path: ~/.ssh/id_rsa
+    role: [controlplane,worker,etcd]
+  - address: 45.76.232.90
+    user: rancher
+    ssh_key_path: ~/.ssh/id_rsa
+    role: [controlplane,worker,etcd]
+  - address: 45.76.235.198
+    user: rancher
+    ssh_key_path: ~/.ssh/id_rsa
+    role: [controlplane,worker,etcd]

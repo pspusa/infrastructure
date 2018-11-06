@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+#./.parseargs
+
+echo "Creating vultr nodes..."
+./create-nodes.sh
+
+echo "Getting vultr ip addresses and creating nodes.yml"
+./get-nodes.sh
+
+echo "Creating cluster..."
+./create-cluster.sh
+
+echo "Installing helm, deploying rancher and other helm packages"
+./install.sh
