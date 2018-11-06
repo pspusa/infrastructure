@@ -47,14 +47,6 @@ EOT
   }
 }
 
-data "null_data_source" "status" {
-  depends_on = ["null_resource.kubectl"]
-
-  inputs = {
-    value = "initiated"
-  }
-}
-
 output "status" {
-  value = "true"
+  value = "deployed"
 }
