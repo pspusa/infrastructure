@@ -1,0 +1,32 @@
+nodes:
+  - address: 45.76.233.141
+    user: rancher
+    hostname: vultr-prod-1
+    ssh_key_path: ~/.ssh/id_rsa
+    role: [controlplane,worker,etcd]
+  - address: 45.76.232.90
+    user: rancher
+    hostname: vultr-prod-2
+    ssh_key_path: ~/.ssh/id_rsa
+    role: [controlplane,worker,etcd]
+  - address: 45.76.235.198
+    user: rancher
+    hostname: vultr-prod-3
+    ssh_key_path: ~/.ssh/id_rsa
+    role: [controlplane,worker,etcd]
+  - address: 108.61.128.28
+    user: rancher
+    hostname: vultr-prod-4
+    ssh_key_path: ~/.ssh/id_rsa
+    role: [controlplane,worker,etcd]
+  - address: 107.155.93.90
+    user: rancher
+    hostname: psp-k8n-ops
+    ssh_key_path: ~/.ssh/id_rsa
+    role: [controlplane,worker,etcd]
+cluster_name: psp-prod
+services:
+  etcd:
+    snapshot: true
+    creation: 6h
+    retention: 24h
