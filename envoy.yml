@@ -1,0 +1,45 @@
+admin:
+  access_log_path: /tmp/admin_access.log
+  address:
+    socket_address: { address: 0.0.0.0, port_value: 9901 }
+
+listeners:
+- name: listener_0
+  address:
+    socket_address: { address: 0.0.0.0, port_value: 3389 }
+  filter_chains:
+  - filters:
+    - name: envoy.tcp_proxy
+      config:
+        stat_prefix: ingress_http
+        codec_type: AUTO
+        route_config:
+          name: local_route
+          virtual_hosts:
+          - name: prod
+            domains: ["prod.perspectives.org"]
+            routes:
+            - match: { prefix: "/" }
+              route: { cluster: prod_rdp }
+          - name: staging
+            domains: ["staging.perspectives.org"]
+            routes:
+            - match: { prefix: "/" }
+              route: { cluster: staging_rdp }
+        http_filters:
+        - name: envoy.router
+
+
+clusters:
+- name: prod_rdp
+  connect_timeout: 0.25s
+  type: LOGICAL_DNS
+  # Comment out the following line to test on v6 networks
+  lb_policy: ROUND_ROBIN
+  hosts: [{ socket_address: { address: 162.213.196.30, port_value: 3389 }}]
+- name: staging_rdp
+  connect_timeout: 0.25s
+  type: LOGICAL_DNS
+  # Comment out the following line to test on v6 networks
+  lb_policy: ROUND_ROBIN
+  hosts: [{ socket_address: { address: 23.92.79.142, port_value: 3389 }}]

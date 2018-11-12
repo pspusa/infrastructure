@@ -1,24 +1,29 @@
 nodes:
-  - address: 45.76.233.141
+  - address: 107.155.96.58
     user: rancher
-    hostname: vultr-prod-1
+    hostname: psp-k8n-primary
     ssh_key_path: ~/.ssh/id_rsa
-    role: [controlplane,etcd,worker]
-  - address: 45.76.232.90
-    user: rancher
-    hostname: vultr-prod-2
-    ssh_key_path: ~/.ssh/id_rsa
-    role: [controlplane,etcd,worker]
-  - address: 45.76.235.198
-    user: rancher
-    hostname: vultr-prod-3
-    ssh_key_path: ~/.ssh/id_rsa
-    role: [controlplane,etcd,worker]
+    role: [controlplane,worker,etcd]
   - address: 107.155.93.90
     user: rancher
     hostname: psp-k8n-ops
     ssh_key_path: ~/.ssh/id_rsa
-    role: [controlplane,worker]
+    role: [controlplane,worker,etcd]
+  - address: 45.76.233.141
+    user: rancher
+    hostname: vultr-prod-1
+    ssh_key_path: ~/.ssh/id_rsa
+    role: [controlplane,etcd]
+  - address: 45.76.232.90
+    user: rancher
+    hostname: vultr-prod-2
+    ssh_key_path: ~/.ssh/id_rsa
+    role: [controlplane,etcd]
+  - address: 45.76.235.198
+    user: rancher
+    hostname: vultr-prod-3
+    ssh_key_path: ~/.ssh/id_rsa
+    role: [controlplane,etcd]
 cluster_name: psp-prod
 services:
   etcd:

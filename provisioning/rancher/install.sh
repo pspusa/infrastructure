@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mv ./kube_config_cluster.yml ~/.kube/config
+cp ./kube_config_cluster.yml ~/.kube/config
 
 kubectl -n kube-system create serviceaccount tiller
 

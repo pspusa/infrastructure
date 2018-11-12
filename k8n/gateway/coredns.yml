@@ -1,0 +1,5 @@
+. {
+    proxy . /etc/resolv.conf {
+        except example.org
+    }
+}

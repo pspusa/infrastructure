@@ -3,7 +3,6 @@ k8n/setup/dashboard/certs/*
 *.pem
 *.crt
 *.key
-
 kube_config_cluster.yml
 
 # Terraform files
