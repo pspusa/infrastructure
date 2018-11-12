@@ -1,6 +1,10 @@
 k8n/setup/dashboard/certs/*
 .env
+*.pem
+*.crt
+*.key
 
+kube_config_cluster.yml
 
 # Terraform files
 .terraform

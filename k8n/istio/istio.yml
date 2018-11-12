@@ -2577,7 +2577,7 @@ metadata:
     app: istio-egressgateway
     istio: egressgateway
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: istio-egressgateway
     istio: egressgateway
@@ -2602,7 +2602,7 @@ metadata:
     app: istio-ingressgateway
     istio: ingressgateway
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: istio-ingressgateway
     istio: ingressgateway
