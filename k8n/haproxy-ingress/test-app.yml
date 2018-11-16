@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: sso.perspectives.org
+    external-dns.alpha.kubernetes.io/ttl: "120" #optional
+    ingress.kubernetes.io/oauth: oauth2_proxy
+  name: sso
+spec:
+  rules:
+  - host: sso.perspectives.org
+    http:
+      paths:
+      - backend:
+          serviceName: oauth2-proxy
+          servicePort: 4180
+        path: /oauth2
+      - backend:
+          serviceName: echoserver
+          servicePort: 8080
+        path: /
+  tls:
+  - hosts:
+    - perspectives.org
+    - sso.perspectives.org
+    - '*.perspectives.org'
+    secretName: psp-tls # < cert-manager will store the created certificate in this secret.

@@ -1,0 +1,29 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: psp-tls
+  namespace: default
+spec:
+  secretName: psp-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: '*.psplabs.org'
+  dnsNames:
+  - perspectives.org
+  - psplabs.org
+  - pspusa.app
+  - '*.perspectives.org'
+  - '*.psplabs.org'
+  - '*.pspusa.app'
+  acme:
+    config:
+    - dns01:
+        provider: cloudflare-dns
+      domains:
+      - '*.perspectives.org'
+      - perspectives.org
+      - '*.psplabs.org'
+      - psplabs.org
+      - '*.pspusa.app'
+      - pspusa.app

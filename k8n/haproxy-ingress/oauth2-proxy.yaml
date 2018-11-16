@@ -1,0 +1,54 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: oauth2-proxy
+  name: oauth2-proxy
+spec:
+  selector:
+    matchLabels:
+      run: oauth2-proxy
+  template:
+    metadata:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: sso.perspectives.org
+      labels:
+        run: oauth2-proxy
+    spec:
+      containers:
+      - name: oauth2-proxy
+        image: quay.io/jcmoraisjr/oauth2-proxy
+        imagePullPolicy: Always
+        args:
+        - /oauth2_proxy
+        - --http-address=http://:4180
+        - --upstream=https://sso.perspectives.org
+        - --provider=Google
+        - --client-id=$HA_OAUTH2_CLIENT_ID
+        - --client-secret=$HA_OAUTH2_CLIENT_SECRET
+        - --proxy-prefix=/oauth2
+        - --redirect-url=/oauth2/callback
+        - --email-domain=perspectives.org
+        - --cookie-name=_oauth2_proxy
+        - --cookie-secret=HA_COOKIE_SECRET
+        - --cookie-secure=true
+        - --cookie-expire=24h
+        - --set-xauthrequest=true
+        ports:
+        - containerPort: 4180
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: oauth2-proxy
+  name: oauth2-proxy
+spec:
+  ports:
+  - port: 4180
+    protocol: TCP
+    targetPort: 4180
+  selector:
+    run: oauth2-proxy

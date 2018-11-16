@@ -2,7 +2,7 @@
 set -x
 
 # source the env file - it should contain a VULTR_API_KEY
-. ./.env
+source ./.env
 export VULTR_API_KEY=$VULTR_API_KEY
 
 
@@ -14,15 +14,15 @@ command -v vultr >/dev/null 2>&1 || {
 }
 
 
-COUNT=3
-CLUSTER_ENV=prod
+COUNT=${K8N_NODE_COUNT:-3}
+CLUSTER_ENV=${K8N_CLUSTER_ENV:-prod}
 PREFIX="dal-$CLUSTER_ENV"
-REGION=3 # Dallas
-PLAN=203 # 4096 MB RAM / 60 GB SSD / $20.00/mo
-OS=159 # Custom OS - must be 159 to use IPXE
+REGION=${K8N_REGION:-3} # Dallas
+PLAN=${K8N_PLAN:-203} # 4096 MB RAM / 60 GB SSD / $20.00/mo
+OS=${K8N_OS:-159} # Custom OS - must be 159 to use IPXE
 #OS=215 # Ubuntu 16.04 x64
 #IPXE_SCRIPT=325538 # rancher-agentless-slave
-IPXE_SCRIPT=351346 # rancher-agentless-slave
+IPXE_SCRIPT=${K8N_IPXE_SCRIPT:-351346} # rancher-agentless-slave
 #SSHKEYID=5b3e8e837146e
 
 TAG=$PREFIX-k8n-cluster
@@ -33,7 +33,7 @@ rm -rf ./logs
 mkdir logs
 
 for i in {1..3}; do
-	vultr server create -n $PREFIX-$i --hostname $PREFIX-$i -r $REGION -p $PLAN -s $IPXE_SCRIPT -o $OS --tag $PREFIX-k8n-cluster >> logs/vultr-create-results.txt
+	vultr server create -n $PREFIX-$i --hostname $PREFIX-$i -r $REGION -p $PLAN -s $IPXE_SCRIPT -o $OS --tag $TAG >> logs/vultr-create-results.txt
   #vultr server create -n $PREFIX-0$i --hostname $PREFIX-$i -k $SSHKEYID -r $REGION -p $PLAN --private-networking=true -o $OS --tag $PREFIX-k8n-cluster >> logs/vultr-create-results.txt
 done
 

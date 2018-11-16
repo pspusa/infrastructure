@@ -1,5 +1,7 @@
 k8n/setup/dashboard/certs/*
 .env
+*.env
+*secret*.yml
 *.pem
 *.crt
 *.key
@@ -10,3 +12,6 @@ kube_config_cluster.yml
 terraform.tfstate
 terraform.tfvars
 *.tfstate*
+
+
+*generated_configs*
